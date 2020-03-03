@@ -107,6 +107,7 @@ class Experiment:
 
     def _set_saved_config(self, cuda_devices):
         saved_config_dict = self.model_checkpoint["config"]
+        saved_config_dict["iterator"]["batch_size"] = saved_config_dict["iterator"]["batch_size"] // len(cuda_devices)
         self.config_dict = saved_config_dict
 
         logger.info("Load saved_config ...")
